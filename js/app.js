@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================= 2. MOBILE MENU / HAMBURGER =================
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const navMenu = document.getElementById('nav-menu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link, .btn-nav');
 
   function toggleMenu() {
     hamburgerBtn.classList.toggle('active');
