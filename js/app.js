@@ -521,7 +521,12 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = titleText;
     modalText.innerHTML = detailedText;
     modalExternalLink.href = externalUrl;
-    modalExternalLink.textContent = isBlog ? 'Full Blog Details' : 'Full Event Details';
+    if (isBlog) {
+      modalExternalLink.style.display = 'none';
+    } else {
+      modalExternalLink.style.display = '';
+      modalExternalLink.textContent = 'Full Event Details';
+    }
 
     // Show modal
     newsModal.classList.add('active');
