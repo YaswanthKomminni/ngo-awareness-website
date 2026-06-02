@@ -240,7 +240,7 @@ header.scrolled .nav-link {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 20px; /* Reduced gap from 32px to 20px to prevent wrapping or logo overlap on desktop screens */
 }
 
 .nav-link {
@@ -316,7 +316,7 @@ header.scrolled .hamburger span {
   min-height: 700px;
   display: flex;
   align-items: center;
-  background: url('../images/banner.jpg') no-repeat center center/cover;
+  background: url('../images/hero_bg.jpg') no-repeat center center/cover;
   overflow: hidden;
 }
 
@@ -871,18 +871,13 @@ header.scrolled .hamburger span {
   z-index: 2;
 }
 
-.gallery-icon {
-  font-size: 2rem;
-  margin-bottom: 12px;
-  transform: translateY(20px);
-  transition: var(--transition-smooth);
-}
-
 .gallery-title {
   font-family: var(--font-headings);
-  font-weight: 600;
-  font-size: 1.1rem;
-  transform: translateY(20px);
+  font-weight: 700; /* High legibility bold font */
+  font-size: 1.25rem; /* Spacious font size */
+  letter-spacing: 0.5px;
+  text-transform: uppercase; /* Clean professional uppercase */
+  transform: translateY(15px); /* Smooth slide up offset */
   transition: var(--transition-smooth);
 }
 
@@ -894,7 +889,6 @@ header.scrolled .hamburger span {
   opacity: 1;
 }
 
-.gallery-item:hover .gallery-icon,
 .gallery-item:hover .gallery-title {
   transform: translateY(0);
 }
@@ -1025,17 +1019,46 @@ header.scrolled .hamburger span {
 }
 
 .modal-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   width: 100%;
   max-width: 500px;
+  max-height: 90vh; /* Limits the modal card height to 90% of the viewport height */
   border-radius: var(--border-radius-lg);
-  padding: 40px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 20px 40px rgba(0, 0, 0, 0.15);
   position: relative;
   transform: scale(0.85);
   transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Clips scrolling content at the rounded card corners */
+  padding: 0;
+}
+
+/* Persistent scrollable modal body */
+.modal-body-scroll {
+  overflow-y: auto;
+  flex-grow: 1;
+  padding: 40px;
+  max-height: calc(90vh - 20px);
+}
+
+/* Custom scrollbar for scrollable modal body containers */
+.modal-body-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-body-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+.modal-body-scroll::-webkit-scrollbar-thumb {
+  background: rgba(46, 139, 87, 0.3);
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+.modal-body-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-green);
 }
 
 .modal-overlay.active .modal-card {
@@ -1049,6 +1072,7 @@ header.scrolled .hamburger span {
   font-size: 1.8rem;
   color: var(--color-text-light);
   cursor: pointer;
+  z-index: 10; /* Ensures the close button floats above the scrolling form contents */
   transition: var(--transition-smooth);
 }
 
@@ -1072,33 +1096,36 @@ header.scrolled .hamburger span {
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 22px; /* Increased vertical gap to make the form look extremely spacious */
 }
 
 .form-label {
   display: block;
   font-family: var(--font-headings);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.92rem; /* Slightly refined label font size */
   color: var(--color-dark-blue);
-  margin-bottom: 8px;
+  margin-bottom: 9px;
+  letter-spacing: 0.2px;
 }
 
 .form-input {
   width: 100%;
-  padding: 12px 16px;
-  border: 1px solid rgba(11, 37, 69, 0.15);
+  padding: 13px 18px; /* Balanced padding for elegant typography height */
+  border: 1px solid rgba(11, 37, 69, 0.12);
   border-radius: var(--border-radius-sm);
   font-family: var(--font-body);
   font-size: 0.95rem;
-  background-color: var(--color-white);
+  background-color: #f8fafc; /* Premium high-contrast soft grey background */
+  color: var(--color-dark-blue);
   transition: var(--transition-smooth);
 }
 
 .form-input:focus {
   outline: none;
   border-color: var(--color-primary-green);
-  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.15);
+  box-shadow: 0 0 0 4px rgba(46, 139, 87, 0.12); /* Soft green focusing ring */
+  background-color: var(--color-white); /* Elevates input focus visually */
 }
 
 textarea.form-input {
@@ -1108,14 +1135,42 @@ textarea.form-input {
 
 .btn-submit {
   width: 100%;
+  padding: 14px 24px;
   background-color: var(--color-primary-green);
   color: var(--color-white);
-  margin-top: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 15px;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
 }
 
 .btn-submit:hover {
   background-color: var(--color-primary-green-hover);
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(46, 139, 87, 0.3);
+}
+
+/* Beautiful Animated Form Error Messages */
+.error-message {
+  display: block;
+  color: #e11d48; /* Premium rose/red error color */
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-top: 6px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 0;
+  overflow: hidden;
+}
+
+.error-message.active {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 20px;
+  margin-bottom: 2px;
 }
 
 /* Success Card Inside Modal */
@@ -1380,7 +1435,7 @@ footer {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   header {
     padding: 16px 0;
     background-color: rgba(11, 37, 69, 0.95);
@@ -1448,7 +1503,9 @@ footer {
   header.scrolled .nav-link {
     color: var(--color-white) !important;
   }
-  
+}
+
+@media (max-width: 768px) {
   .about-grid, .why-grid {
     grid-template-columns: 1fr;
   }
@@ -1525,7 +1582,363 @@ footer {
     width: 100%;
   }
   
-  .modal-card {
+  .modal-body-scroll {
     padding: 30px 20px;
+  }
+  .modal-close {
+    top: 15px;
+    right: 18px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ================================================================
+   --- EVENTS & BLOG SECTION ---
+================================================================ */
+.news-subsection-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  border-left: 4px solid var(--color-primary-green);
+  padding-left: 16px;
+}
+
+.news-subsection-title h3 {
+  font-size: 1.7rem;
+  color: var(--color-dark-blue);
+  margin: 0;
+  font-family: var(--font-headings);
+  font-weight: 700;
+}
+
+.btn-news-viewall {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-primary-green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-news-viewall:hover {
+  color: var(--color-orange-accent);
+}
+
+.btn-news-viewall svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-news-viewall:hover svg {
+  transform: translateX(4px);
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.news-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(11, 37, 69, 0.03);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg), 0 10px 30px rgba(46, 139, 87, 0.08);
+}
+
+.news-img-wrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.news-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-card:hover .news-img-wrapper img {
+  transform: scale(1.1);
+}
+
+.news-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 4px 12px;
+  color: var(--color-white);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.5px;
+  border-radius: var(--border-radius-sm);
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+}
+
+.event-tag {
+  background-color: var(--color-orange-accent);
+}
+
+.blog-tag {
+  background-color: var(--color-primary-green);
+}
+
+.news-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-date {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  font-weight: 500;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.news-card-title {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  color: var(--color-dark-blue);
+  line-height: 1.35;
+  transition: var(--transition-smooth);
+}
+
+.news-card:hover .news-card-title {
+  color: var(--color-primary-green);
+}
+
+.news-desc {
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.news-link {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-primary-green);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  border-top: 1px solid rgba(11, 37, 69, 0.08);
+  padding-top: 12px;
+  transition: var(--transition-smooth);
+}
+
+.news-link:hover {
+  color: var(--color-orange-accent);
+}
+
+.news-link svg {
+  transition: transform 0.3s ease;
+}
+
+.news-link:hover svg {
+  transform: translateX(4px);
+}
+
+/* Responsive adjustments for Events & Blog section */
+@media (max-width: 992px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .news-subsection-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================================================
+   --- NEWS DETAIL MODAL (RESPONSIVE TWO-COLUMN DESIGN) ---
+================================================================ */
+.news-modal-card {
+  max-width: 900px !important;
+  width: 92% !important;
+  max-height: 85vh !important; /* Limit modal height to fit screen comfortably */
+  padding: 0 !important;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-lg), 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.news-modal-body {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.news-modal-img-wrapper {
+  position: relative;
+  width: 45%; /* 45% width for left side image */
+  height: 100%;
+  min-height: 480px;
+  flex-shrink: 0;
+}
+
+.news-modal-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-modal-tag {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  padding: 6px 16px;
+  color: var(--color-white);
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  border-radius: var(--border-radius-sm);
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+
+.news-modal-content {
+  padding: 40px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Keep content perfectly inside boundary */
+}
+
+.news-modal-scrollable-body {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin-bottom: 20px;
+  padding-right: 16px;
+  max-height: calc(85vh - 160px); /* Restrict text height for scroll indicator */
+}
+
+/* Custom scrollbar for scrollable content body */
+.news-modal-scrollable-body::-webkit-scrollbar {
+  width: 6px;
+}
+.news-modal-scrollable-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+}
+.news-modal-scrollable-body::-webkit-scrollbar-thumb {
+  background: rgba(46, 139, 87, 0.3);
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+.news-modal-scrollable-body::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-green);
+}
+
+.news-modal-date {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  font-weight: 600;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.news-modal-title {
+  font-size: 1.8rem;
+  color: var(--color-dark-blue);
+  margin-bottom: 16px;
+  font-family: var(--font-headings);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.news-modal-text {
+  color: var(--color-text-light);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.news-modal-footer {
+  border-top: 1px solid rgba(11, 37, 69, 0.08);
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments for Modal Details */
+@media (max-width: 768px) {
+  .news-modal-card {
+    max-height: 90vh !important;
+  }
+  
+  .news-modal-body {
+    flex-direction: column;
+    overflow-y: auto; /* Allow entire body to scroll on mobile */
+  }
+  
+  .news-modal-img-wrapper {
+    width: 100%;
+    height: 220px;
+    min-height: auto;
+  }
+  
+  .news-modal-content {
+    padding: 24px;
+    overflow: visible;
+  }
+  
+  .news-modal-scrollable-body {
+    overflow: visible; /* Disable inner scroll on mobile to let body scroll */
+    max-height: none !important;
+    margin-bottom: 16px;
+    padding-right: 0;
+  }
+  
+  .news-modal-title {
+    font-size: 1.4rem;
+  }
+  
+  .news-modal-text {
+    font-size: 0.95rem;
   }
 }
