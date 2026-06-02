@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = titleText;
     modalText.innerHTML = detailedText;
     modalExternalLink.href = externalUrl;
-    modalExternalLink.textContent = isBlog ? 'Read Original Blog Post' : 'View Original Event Page';
+    modalExternalLink.textContent = isBlog ? 'Full Blog Details' : 'Full Event Details';
 
     // Show modal
     newsModal.classList.add('active');
